@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFFFFF">
+<title>Sábado em SP</title>
+<meta name="description" content="Mirá, sebo e Riviera — um sábado a dois em São Paulo.">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap">
+<style>
+:root{
+  /* — Cor — João Luz Design v1.1 */
+  --ink:#0A0A0A;--slate:#3D3D3D;--steel:#6E6E6E;--ash:#A8A8A5;
+  --fog:#CFCFCC;--line:#E3E3E0;--bone:#F4F4F2;--paper:#FFFFFF;
+  /* — Espaço (base 4) — */
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;
+  --s7:48px;--s8:64px;--s9:96px;
+  /* — Tipo — */
+  --font:'Switzer',system-ui,-apple-system,sans-serif;
+  /* — Movimento — */
+  --ease:cubic-bezier(.2,0,0,1);--fast:150ms;--base:240ms;--slow:400ms;
+  --gutter:24px;--max:480px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font);background:var(--paper);color:var(--ink);
+  font-size:15px;line-height:1.65;letter-spacing:-.005em;
+  -webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;
+}
+::selection{background:var(--ink);color:var(--paper)}
+img{display:block;max-width:100%}
+a{color:inherit}
+
+/* ——— Tipo ——— */
+.label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;line-height:1}
+.d1{font-size:clamp(44px,13vw,64px);font-weight:500;line-height:.94;letter-spacing:-.045em}
+.t1{font-size:30px;font-weight:500;line-height:1.12;letter-spacing:-.03em}
+.t2{font-size:24px;font-weight:500;line-height:1.22;letter-spacing:-.025em}
+.bl{font-size:18px;line-height:1.55;letter-spacing:-.011em}
+.sm{font-size:13.5px;line-height:1.55;color:var(--steel)}
+.cap{font-size:12px;line-height:1.45;letter-spacing:.015em;color:var(--ash)}
+.muted{color:var(--steel)}
+
+/* ——— Layout ——— */
+.page{max-width:var(--max);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line);min-height:100vh}
+section{padding:var(--s8) var(--gutter);border-bottom:1px solid var(--line)}
+.sec-head{display:flex;gap:var(--s4);align-items:baseline;margin-bottom:var(--s6)}
+.sec-num{font-size:11px;font-weight:600;letter-spacing:.14em;padding-top:4px;min-width:20px}
+
+/* ——— Topo ——— */
+.top{display:flex;justify-content:space-between;align-items:center;padding:var(--s4) var(--gutter);border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:10}
+.top-mark{display:flex;align-items:center;gap:10px}
+.top-mark svg{width:20px;height:20px;color:var(--ink)}
+.top-mark span{font-size:13px;font-weight:600;letter-spacing:-.02em}
+
+/* ——— Capa ——— */
+.cover{padding-top:var(--s8);padding-bottom:var(--s7);position:relative;overflow:hidden}
+.cover-bg{position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:48px 48px;opacity:.55;
+  -webkit-mask-image:radial-gradient(120% 80% at 100% 0%,#000 0%,transparent 70%);mask-image:radial-gradient(120% 80% at 100% 0%,#000 0%,transparent 70%)}
+.cover-inner{position:relative}
+.cover .d1{margin:var(--s5) 0 var(--s5)}
+.cover .bl{max-width:34ch}
+.meta{display:grid;grid-template-columns:repeat(3,1fr);margin-top:var(--s7);border-top:1px solid var(--ink)}
+.meta div{padding-top:var(--s4);padding-right:var(--s3)}
+.meta p{margin-top:8px;font-size:14px;line-height:1.35;letter-spacing:-.01em}
+.meta p small{display:block;font-size:12px;color:var(--steel)}
+
+/* ——— Paradas ——— */
+.stop{padding:var(--s7) 0;border-top:1px solid var(--line)}
+.stop:first-of-type{border-top:0;padding-top:0}
+.stop-time{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--s4)}
+.stop-time .label{color:var(--ink)}
+.stop-time .cap{color:var(--steel)}
+.stop h3{margin-bottom:6px}
+.stop .lead{font-size:15px;color:var(--steel);margin-bottom:var(--s5)}
+.stop p.body{margin-top:var(--s5)}
+.photo{position:relative;aspect-ratio:4/3;background:var(--bone);overflow:hidden;border:1px solid var(--line)}
+.photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.04);opacity:0;transition:opacity var(--slow) var(--ease)}
+.photo img.ok{opacity:1}
+.photo .ph{position:absolute;inset:0;display:none;flex-direction:column;justify-content:flex-end;padding:var(--s4)}
+.photo.noimg .ph{display:flex}
+.photo.noimg img{display:none}
+.photo.tall{aspect-ratio:4/5}
+.duo{display:grid;grid-template-columns:2fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+.duo .photo{border:0;aspect-ratio:auto;height:100%}
+.duo .photo:first-child{aspect-ratio:4/5}
+.credit{margin-top:10px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--s5)}
+.tag{display:inline-block;padding:6px 11px;border:1px solid var(--line);font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--steel);line-height:1.2}
+.tag.fill{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.link{display:inline-flex;gap:8px;align-items:center;margin-top:var(--s5);font-size:13px;font-weight:500;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--ash);padding-bottom:2px;transition:border-color var(--fast) var(--ease)}
+.link:hover,.link:active{border-color:var(--ink)}
+.link .arw{transition:transform var(--base) var(--ease)}
+.link:hover .arw{transform:translateX(4px)}
+
+/* Bloco do metrô (sem foto) */
+.transit{background:var(--bone);border:1px solid var(--line);padding:var(--s5)}
+.transit-line{display:grid;grid-template-columns:auto 1fr;gap:var(--s4);align-items:center}
+.transit-line + .transit-line{margin-top:var(--s4);padding-top:var(--s4);border-top:1px solid var(--line)}
+.dot{width:10px;height:10px;background:var(--ink)}
+.dot.o{background:transparent;border:1px solid var(--ink)}
+
+/* ——— Deslocamento ——— */
+.legs{border-top:1px solid var(--line)}
+.leg{display:grid;grid-template-columns:28px 1fr;gap:var(--s4);padding:var(--s5) 0;border-bottom:1px solid var(--line)}
+.leg i{font-style:normal;font-size:11px;font-weight:600;letter-spacing:.14em;color:var(--ash);padding-top:3px}
+.leg h4{font-size:15px;font-weight:600;letter-spacing:-.015em;line-height:1.35}
+.leg p{margin-top:4px}
+
+/* ——— Aviso ——— */
+.alert{display:grid;grid-template-columns:auto 1fr;gap:var(--s4);border-top:1px solid var(--ink);padding-top:var(--s5);margin-top:var(--s7)}
+
+/* ——— CTA (único bloco invertido) ——— */
+.cta{background:var(--ink);color:var(--paper);padding:var(--s8) var(--gutter) var(--s8);border-bottom:0}
+.cta .label{color:#6E6E6E}
+.cta .d1{margin:var(--s5) 0 var(--s4)}
+.cta .bl{color:#CFCFCC;max-width:30ch}
+.btn{
+  display:flex;justify-content:space-between;align-items:center;width:100%;
+  margin-top:var(--s7);padding:20px 24px;border:1px solid var(--paper);
+  background:var(--paper);color:var(--ink);font-family:var(--font);font-size:15px;font-weight:600;
+  letter-spacing:.02em;cursor:pointer;text-decoration:none;
+  transition:background var(--base) var(--ease),color var(--base) var(--ease);
+  -webkit-tap-highlight-color:transparent;
+}
+.btn:hover,.btn:active{background:var(--ink);color:var(--paper)}
+.btn .arw{font-size:18px;transition:transform var(--base) var(--ease)}
+.btn:hover .arw{transform:translateX(4px)}
+.cta .cap{margin-top:var(--s4);color:#6E6E6E}
+.cta-meta{display:grid;grid-template-columns:1fr 1fr;margin-top:var(--s7);border-top:1px solid #3D3D3D}
+.cta-meta div{padding-top:var(--s4)}
+.cta-meta p{margin-top:8px;font-size:14px;color:var(--paper)}
+
+footer{padding:var(--s6) var(--gutter) calc(var(--s6) + env(safe-area-inset-bottom));display:flex;justify-content:space-between;align-items:center;gap:var(--s4);background:var(--ink);border-top:1px solid #3D3D3D}
+footer svg{width:16px;height:16px;color:#6E6E6E}
+footer .cap{color:#6E6E6E}
+
+/* ——— Movimento ——— */
+.rv{opacity:0;transform:translateY(8px);transition:opacity var(--slow) var(--ease),transform var(--slow) var(--ease)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  *{transition:none!important}
+}
+@media (max-width:360px){
+  :root{--gutter:16px}
+  .meta{grid-template-columns:1fr 1fr}
+  .meta div:last-child{grid-column:1/-1}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="mark" viewBox="0 0 356 356"><path fill="currentColor" d="M301.69.07h-123.69v-.07H54.54C49.08,30.46,31.57,49.33.07,54.31v123.69h-.07v123.46c30.46,5.47,49.33,22.98,54.31,54.47h123.69v.07h123.46c5.47-30.46,22.98-49.33,54.47-54.31v-123.69h.07V54.54c-30.46-5.47-49.33-22.98-54.31-54.47ZM275.79,206.76c6.28,25.33,13.22,50.54,19.59,75.88,2.78,11.05-1.54,15.46-12.41,12.77-28.68-7.16-57.79-13.16-85.74-22.52-6.77-2.26-13.09-2.92-19.23-2.64v-.24c-9.96.14-19.1,3.41-28.76,5.79-25.33,6.28-50.54,13.22-75.88,19.59-11.05,2.78-15.46-1.54-12.77-12.41,7.16-28.68,13.16-57.79,22.52-85.74,2.26-6.77,2.92-13.09,2.64-19.23h.24c-.14-9.96-3.41-19.1-5.79-28.76-6.28-25.33-13.22-50.54-19.59-75.88-2.78-11.05,1.54-15.46,12.41-12.77,28.68,7.16,57.79,13.16,85.74,22.52,6.77,2.26,13.09,2.92,19.23,2.64v.24c9.96-.14,19.1-3.41,28.76-5.79,25.33-6.28,50.54-13.22,75.88-19.59,11.05-2.78,15.46,1.54,12.77,12.41-7.16,28.68-13.16,57.79-22.52,85.74-2.26,6.77-2.92,13.09-2.64,19.23h-.24c.14,9.96,3.41,19.1,5.79,28.76Z"/></symbol></svg>
+
+<div class="page">
+
+  <header class="top">
+    <div class="top-mark"><svg><use href="#mark"/></svg><span>Sábado em SP</span></div>
+    <span class="label muted">24 · 10</span>
+  </header>
+
+  <!-- CAPA -->
+  <section class="cover">
+    <div class="cover-bg"></div>
+    <div class="cover-inner rv">
+      <div class="label muted">Roteiro a dois · Sábado, 24 de outubro</div>
+      <h1 class="d1">Pão, livros e um bar de 1949.</h1>
+      <p class="bl muted">Uma tarde que começa com panificação autoral em Pinheiros, passa por um sebo e termina num dos bares mais tradicionais da Paulista.</p>
+      <div class="meta">
+        <div><div class="label muted">Início</div><p>14h<small>Barra Funda</small></p></div>
+        <div><div class="label muted">Fim</div><p>~20h30<small>Paulista</small></p></div>
+        <div><div class="label muted">Paradas</div><p>3<small>+ metrô</small></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 ROTEIRO -->
+  <section id="roteiro">
+    <div class="sec-head rv">
+      <div class="sec-num">01</div>
+      <h2 class="t1">O roteiro</h2>
+    </div>
+
+    <!-- Parada 1 -->
+    <article class="stop rv">
+      <div class="stop-time"><span class="label">14h00</span><span class="cap">Ponto de encontro</span></div>
+      <h3 class="t2">Encontro na Barra Funda</h3>
+      <p class="lead">Início do passeio</p>
+      <div class="transit">
+        <div class="transit-line"><span class="dot"></span><div><div class="label">Estação Palmeiras-Barra Funda</div><p class="sm" style="margin-top:6px">A gente se encontra aqui.</p></div></div>
+        <div class="transit-line"><span class="dot o"></span><div><div class="label">Metrô até Pinheiros</div><p class="sm" style="margin-top:6px">Chegada à padaria entre 14h30 e 15h, com tempo para comer sem pressa.</p></div></div>
+      </div>
+      <a class="link" href="https://www.google.com/maps/search/?api=1&query=Esta%C3%A7%C3%A3o+Palmeiras-Barra+Funda+S%C3%A3o+Paulo" target="_blank" rel="noopener">Ver no mapa <span class="arw">→</span></a>
+    </article>
+
+    <!-- Parada 2 -->
+    <article class="stop rv">
+      <div class="stop-time"><span class="label">14h45 — 15h45</span><span class="cap">Pinheiros</span></div>
+      <h3 class="t2">Mirá Padaria Autoral</h3>
+      <p class="lead">Comida artesanal e café</p>
+      <figure>
+        <div class="photo">
+          <img src="https://gironews.com/wp-content/uploads/2026/02/Mira-Padaria-Autoral-925x400.png" alt="Mirá Padaria Autoral" referrerpolicy="no-referrer" loading="eager">
+          <div class="ph"><span class="label muted">Mirá Padaria</span></div>
+        </div>
+        <figcaption class="cap credit">Foto: divulgação</figcaption>
+      </figure>
+      <p class="body">Panificação autoral com fermentação em koji — o fungo do saquê. Vale pedir um salgado, um doce para dividir e uma bebida para cada um. A comida aqui já é parte do passeio.</p>
+      <div class="tags"><span class="tag">Padaria</span><span class="tag">~1 hora</span></div>
+      <a class="link" href="https://www.google.com/maps/search/?api=1&query=Mir%C3%A1+Padaria+Autoral+Rua+Francisco+Leit%C3%A3o+Pinheiros+S%C3%A3o+Paulo" target="_blank" rel="noopener">Rua Francisco Leitão, Pinheiros <span class="arw">→</span></a>
+    </article>
+
+    <!-- Parada 3 -->
+    <article class="stop rv">
+      <div class="stop-time"><span class="label">16h00 — 17h00</span><span class="cap">Pinheiros</span></div>
+      <h3 class="t2">Sebo Desculpe a Poeira</h3>
+      <p class="lead">Livros, discos e conversa</p>
+      <figure>
+        <div class="duo">
+          <div class="photo">
+            <img src="https://images.adsttc.com/media/images/65bd/078d/f342/4e01/7c33/4bdb/large_jpg/sebo-desculpe-a-poeira-nitsche-arquitetos_3.jpg?1706887076" alt="Fachada do Sebo Desculpe a Poeira" referrerpolicy="no-referrer" loading="lazy">
+            <div class="ph"><span class="label muted">Desculpe a Poeira</span></div>
+          </div>
+          <div class="photo">
+            <img src="https://images.adsttc.com/media/images/65bd/0774/f342/4e01/7c33/4bd4/medium_jpg/sebo-desculpe-a-poeira-nitsche-arquitetos_6.jpg?1706887044" alt="Estantes do sebo" referrerpolicy="no-referrer" loading="lazy">
+            <div class="ph"></div>
+          </div>
+        </div>
+        <figcaption class="cap credit">Fotos: Pedro Mascaro / ArchDaily</figcaption>
+      </figure>
+      <p class="body">Uma caminhada curta desde a Mirá. A ideia é explorar o acervo sem pressa e falar sobre os livros que aparecerem pelo caminho.</p>
+      <div class="tags"><span class="tag fill">Gratuito</span><span class="tag">Fecha às 18h</span></div>
+      <a class="link" href="https://www.google.com/maps/search/?api=1&query=Sebo+Desculpe+a+Poeira+S%C3%A3o+Paulo" target="_blank" rel="noopener">Ver no mapa <span class="arw">→</span></a>
+    </article>
+
+    <!-- Parada 4 -->
+    <article class="stop rv">
+      <div class="stop-time"><span class="label">18h00 — 20h30</span><span class="cap">Paulista</span></div>
+      <h3 class="t2">Riviera Bar</h3>
+      <p class="lead">Jantar e drinks</p>
+      <figure>
+        <div class="photo tall">
+          <img src="https://f.i.uol.com.br/fotografia/2022/02/21/16454756756213f75b96fb9_1645475675_3x2_rt.jpg" data-fallback="https://images.adsttc.com/media/images/54c0/7cc7/e58e/ceef/7000/02f9/medium_jpg/mk27_bar_riviera_romulo_fialdini(64).jpg?1421900992" alt="Riviera Bar" referrerpolicy="no-referrer" loading="lazy">
+          <div class="ph"><span class="label muted">Riviera Bar</span></div>
+        </div>
+        <figcaption class="cap credit">Foto: Folha de S.Paulo</figcaption>
+      </figure>
+      <p class="body">O fechamento. Aberto em 1949 na esquina da Paulista com a Consolação, já recebeu Chico Buarque e Elis Regina. Cardápio com pratos, lanches e coquetéis.</p>
+      <div class="tags"><span class="tag">Bar</span><span class="tag">Desde 1949</span></div>
+      <a class="link" href="https://www.google.com/maps/search/?api=1&query=Riviera+Bar+Av.+Paulista+2584+S%C3%A3o+Paulo" target="_blank" rel="noopener">Av. Paulista, 2584 <span class="arw">→</span></a>
+    </article>
+  </section>
+
+  <!-- 02 DESLOCAMENTO -->
+  <section id="deslocamento">
+    <div class="sec-head rv">
+      <div class="sec-num">02</div>
+      <h2 class="t1">Como a gente se move</h2>
+    </div>
+    <div class="legs rv">
+      <div class="leg"><i>A</i><div><h4>Barra Funda → Mirá</h4><p class="sm">Metrô até a região de Pinheiros, com integração conforme o trajeto.</p></div></div>
+      <div class="leg"><i>B</i><div><h4>Mirá → Sebo</h4><p class="sm">A pé. Os dois ficam em Pinheiros.</p></div></div>
+      <div class="leg"><i>C</i><div><h4>Sebo → Riviera</h4><p class="sm">Caminhada até a estação, metrô até a Paulista e um trecho final a pé.</p></div></div>
+    </div>
+    <div class="alert rv">
+      <span class="label" style="padding-top:3px">!</span>
+      <p class="sm"><strong style="color:var(--ink);font-weight:600">O sebo fecha às 18h aos sábados.</strong> Por isso a saída da Mirá fica para umas 15h45 — dá para ver o acervo com calma e chegar ao Riviera no começo da noite.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="confirmar">
+    <div class="rv">
+      <div class="label">Confirmação</div>
+      <h2 class="d1">Topa?</h2>
+      <p class="bl">Um toque e o sábado inteiro vai para a sua agenda, com horários e endereços.</p>
+      <a class="btn" id="calBtn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sabado+em+SP&dates=20261024T140000/20261024T203000&ctz=America/Sao_Paulo" target="_blank" rel="noopener">
+        <span>Eu vou</span><span class="arw">→</span>
+      </a>
+      <p class="cap">Abre o Google Agenda com o evento pronto para salvar.</p>
+      <div class="cta-meta">
+        <div><div class="label">Quando</div><p>Sáb, 24 out<br>14h — 20h30</p></div>
+        <div><div class="label">Onde</div><p>Barra Funda<br>→ Paulista</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <svg><use href="#mark"/></svg>
+    <span class="cap">Sábado em SP · 2026</span>
+  </footer>
+
+</div>
+
+<script>
+/* ——— Evento no Google Agenda ——— */
+(function(){
+  var details = [
+    'Roteiro de sábado',
+    '',
+    '14h00 · Encontro na estação Palmeiras-Barra Funda — metrô até Pinheiros',
+    '14h45 · Mirá Padaria Autoral (Rua Francisco Leitão, Pinheiros) — salgado, doce e café',
+    '16h00 · Sebo Desculpe a Poeira (Pinheiros) — acervo; fecha às 18h',
+    '18h00 · Riviera Bar (Av. Paulista, 2584) — jantar e drinks'
+  ].join('\n');
+  var params = {
+    action: 'TEMPLATE',
+    text: 'Sábado em SP — Mirá, sebo e Riviera',
+    dates: '20261024T140000/20261024T203000',
+    ctz: 'America/Sao_Paulo',
+    location: 'Estação Palmeiras-Barra Funda, São Paulo - SP',
+    details: details
+  };
+  var qs = Object.keys(params).map(function(k){
+    return k + '=' + encodeURIComponent(params[k]).replace(/%2F/g,'/');
+  }).join('&');
+  document.getElementById('calBtn').href = 'https://calendar.google.com/calendar/render?' + qs;
+})();
+
+/* ——— Fotos: fade-in, fallback e placeholder ——— */
+document.querySelectorAll('.photo img').forEach(function(img){
+  function ok(){ img.classList.add('ok'); }
+  function fail(){
+    var fb = img.getAttribute('data-fallback');
+    if (fb){ img.removeAttribute('data-fallback'); img.src = fb; return; }
+    img.closest('.photo').classList.add('noimg');
+  }
+  if (img.complete){ img.naturalWidth ? ok() : fail(); }
+  img.addEventListener('load', ok);
+  img.addEventListener('error', fail);
+});
+
+/* ——— Revelação no scroll (400ms, 8px, 60ms entre itens) ——— */
+(function(){
+  var els = [].slice.call(document.querySelectorAll('.rv'));
+  if (!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in')}); return; }
+  var io = new IntersectionObserver(function(entries){
+    var i = 0;
+    entries.forEach(function(e){
+      if (e.isIntersecting){
+        var el = e.target;
+        setTimeout(function(){ el.classList.add('in'); }, (i++) * 60);
+        io.unobserve(el);
+      }
+    });
+  }, {rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){ io.observe(e); });
+})();
+</script>
+</body>
+</html>
